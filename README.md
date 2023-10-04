@@ -8,7 +8,7 @@ This is a simple application where I try to practice and understand some basic R
 
 Users should be able to:
 
--  Shorten any valid URL ([Shrtcode API](https://shrtco.de/docs)).
+-  Shorten any valid URL.
 -  One click to copy the generated short URL.
 -  Receive clear error messages if something went wrong.
 
@@ -22,6 +22,10 @@ Users should be able to:
 -  How to handle errors and display them.
 -  Practice general basic concepts.
 -  Practice using TypeScript.
+
+### API user in the project:
+
+-  <a href="https://shrtco.de/docs" target="_blank">Shrtcode API</a>
 
 ## Project setup
 
