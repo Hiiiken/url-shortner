@@ -21,6 +21,7 @@ Users should be able to:
 -  How to handle API calls in React.
 -  How to handle errors and display them.
 -  Practice general basic concepts.
+-  Practice using TypeScript.
 
 ## Project setup
 
