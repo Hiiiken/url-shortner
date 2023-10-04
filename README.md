@@ -23,9 +23,9 @@ Users should be able to:
 -  Practice general basic concepts.
 -  Practice using TypeScript.
 
-### API user in the project:
+### API used in the project:
 
--  <a href="https://shrtco.de/docs" target="_blank">Shrtcode API</a>
+-  <a href="https://shrtco.de/docs" target="_blank" rel="noopener">Shrtcode API</a>
 
 ## Project setup
 
