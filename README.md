@@ -1,4 +1,4 @@
-# URL Shortner
+# URL Shortener
 
 ## Overview
 
@@ -14,13 +14,13 @@ Users should be able to:
 
 ### Links
 
--  Live Preview: [URL Shortner](https://)
+-  Live Preview: [URL Shortener](#)
 
 ### What I learned
 
--  How to do API calls in React.
+-  How to handle API calls in React.
 -  How to handle errors and display them.
--  Practice with reactivity in React and general basic concepts.
+-  Practice general basic concepts.
 
 ## Project setup
 
