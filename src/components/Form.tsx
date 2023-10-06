@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+
+interface ApiResponse {
+   result: { [key: string]: string };
+}
 
 const Form = () => {
    const [inputValue, setInputValue] = useState("");
-   const [responseData, setResponseData] = useState(null);
+   const [responseData, setResponseData] = useState<ApiResponse | null>(null);
    const [isLoading, setIsLoading] = useState(false);
-   const [error, setError] = useState(null);
+   const [error, setError] = useState<string | null>(null);
 
    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(e.target.value);
@@ -15,7 +19,7 @@ const Form = () => {
       fetchData(inputValue);
    };
 
-   const customErrorMessages = {
+   const customErrorMessages: { [key: number]: string } = {
       1: "No URL specified. Please enter a URL to shorten.",
       2: "Invalid URL submitted. Please enter a valid URL.",
       3: "Rate limit reached. Wait a second and try again",
@@ -28,17 +32,17 @@ const Form = () => {
       setIsLoading(true);
 
       try {
-         const response = await axios.get(
-            `https://api.shrtco.de/v2/shorten?url=${userInput}`
-         );
-         const data = response.data;
+         const response: AxiosResponse<ApiResponse> =
+            await axios.get<ApiResponse>(
+               `https://api.shrtco.de/v2/shorten?url=${userInput}`
+            );
+         const data: ApiResponse = response.data;
          setResponseData(data);
          setError(null);
-      } catch (error) {
+      } catch (error: any) {
          if (error.response.data.error_code in customErrorMessages) {
             setError(customErrorMessages[error.response.data.error_code]);
          }
-         console.log(error.response);
       } finally {
          setIsLoading(false);
       }
@@ -82,6 +86,6 @@ const Form = () => {
 
 export default Form;
 
-// Manages the input field for the long URL.
-// Contains the "Generate Short URL" button.
-// Handles user input and initiates the URL shortening process.
+// TODO:
+// Add CSS. Deploy.
+// Add more validation to make sure the user enters a valid URL
