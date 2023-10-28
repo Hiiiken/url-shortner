@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+// import axios, { AxiosResponse } from 'axios';
 
 interface ApiResponse {
    result: { [key: string]: string };
@@ -17,18 +17,20 @@ const Form = () => {
    };
 
    const handleButtonClick = () => {
-      fetchData(inputValue);
+      // fetchData(inputValue);
       setIsVisible(true);
+
+      console.log(setResponseData, setIsLoading, setError);
    };
 
-   const customErrorMessages: { [key: number]: string } = {
-      1: 'No URL specified. Please enter a URL to shorten.',
-      2: 'Invalid URL submitted. Please enter a valid URL.',
-      3: 'Rate limit reached. Wait a second and try again',
-      4: 'IP-Address has been blocked because of violating our terms of service',
-      5: 'shrtcode code (slug) already taken/in use',
-      10: 'Trying to shorten a disallowed Link. More information on disallowed links',
-   };
+   // const customErrorMessages: { [key: number]: string } = {
+   //    1: 'No URL specified. Please enter a URL to shorten.',
+   //    2: 'Invalid URL submitted. Please enter a valid URL.',
+   //    3: 'Rate limit reached. Wait a second and try again',
+   //    4: 'IP-Address has been blocked because of violating our terms of service',
+   //    5: 'shrtcode code (slug) already taken/in use',
+   //    10: 'Trying to shorten a disallowed Link. More information on disallowed links',
+   // };
 
    // NEW API
 
