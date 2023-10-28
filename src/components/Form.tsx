@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import axios, { AxiosResponse } from "axios";
+import React, { useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
 
 interface ApiResponse {
    result: { [key: string]: string };
 }
 
 const Form = () => {
-   const [inputValue, setInputValue] = useState("");
+   const [inputValue, setInputValue] = useState('');
    const [responseData, setResponseData] = useState<ApiResponse | null>(null);
    const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState<string | null>(null);
@@ -22,33 +22,62 @@ const Form = () => {
    };
 
    const customErrorMessages: { [key: number]: string } = {
-      1: "No URL specified. Please enter a URL to shorten.",
-      2: "Invalid URL submitted. Please enter a valid URL.",
-      3: "Rate limit reached. Wait a second and try again",
-      4: "IP-Address has been blocked because of violating our terms of service",
-      5: "shrtcode code (slug) already taken/in use",
-      10: "Trying to shorten a disallowed Link. More information on disallowed links",
+      1: 'No URL specified. Please enter a URL to shorten.',
+      2: 'Invalid URL submitted. Please enter a valid URL.',
+      3: 'Rate limit reached. Wait a second and try again',
+      4: 'IP-Address has been blocked because of violating our terms of service',
+      5: 'shrtcode code (slug) already taken/in use',
+      10: 'Trying to shorten a disallowed Link. More information on disallowed links',
    };
 
-   const fetchData = async (userInput: string) => {
-      setIsLoading(true);
+   // NEW API
 
-      try {
-         const response: AxiosResponse<ApiResponse> =
-            await axios.get<ApiResponse>(
-               `https://api.shrtco.de/v2/shorten?url=${userInput}`
-            );
-         const data: ApiResponse = response.data;
-         setResponseData(data);
-         setError(null);
-      } catch (error: any) {
-         if (error.response.data.error_code in customErrorMessages) {
-            setError(customErrorMessages[error.response.data.error_code]);
+   const apiKey = 'VTW8kvZRwlYRaGahFZaH8TQMqIhYdE9qGn3fRDl0pou3f';
+   const url = 'https://www.google.com';
+   const apiUrl = `https://www.shrtlnk.dev/api/v1/shorten?url=${encodeURIComponent(
+      url
+   )}&api_key=${apiKey}`;
+
+   const requestOptions = {
+      method: 'POST',
+      headers: {
+         'api-key': apiKey,
+         Accept: 'application/json',
+         'Content-Type': 'application/json',
+      },
+   };
+
+   fetch(apiUrl, requestOptions)
+      .then((response) => {
+         if (!response.ok) {
+            throw new Error('Network response was not ok');
          }
-      } finally {
-         setIsLoading(false);
-      }
-   };
+         return response.json();
+      })
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+
+   // OLD API
+
+   // const fetchData = async (userInput: string) => {
+   //    setIsLoading(true);
+
+   //    try {
+   //       const response: AxiosResponse<ApiResponse> =
+   //          await axios.get<ApiResponse>(
+   //             `https://api.shrtco.de/v2/shorten?url=${userInput}`
+   //          );
+   //       const data: ApiResponse = response.data;
+   //       setResponseData(data);
+   //       setError(null);
+   //    } catch (error: any) {
+   //       if (error.response.data.error_code in customErrorMessages) {
+   //          setError(customErrorMessages[error.response.data.error_code]);
+   //       }
+   //    } finally {
+   //       setIsLoading(false);
+   //    }
+   // };
 
    return (
       <div>
@@ -65,7 +94,7 @@ const Form = () => {
                   onChange={handleInputChange}
                />
                <button
-                  className="py-3 px-4 w-full lg:w-1/3 rounded bg-gradient-to-r from-cyan-500 to-cyan-300   text-gray-950 font-semibold hover:bg-gradient-to-r hover:from-cyan-300 hover:to-cyan-500"
+                  className="py-3 px-4 w-full lg:w-1/3 rounded bg-gradient-to-r from-cyan-500 to-cyan-300   text-gray-950 font-semibold hover:bg-gradient-to-r hover:from-cyan-300 hover:to-cyan-500 hover:text-white"
                   onClick={handleButtonClick}
                >
                   Shorten URL
@@ -88,7 +117,7 @@ const Form = () => {
                         The short code is:
                      </p>
                      <p className="font-normal text-white">
-                        {responseData.result.short_link}
+                        {responseData.result.url}
                      </p>
                   </div>
                ) : null}
