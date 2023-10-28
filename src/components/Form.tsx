@@ -18,18 +18,18 @@ const Form = () => {
 
    // NEW API
 
-   const apiKey = 'VTW8kvZRwlYRaGahFZaH8TQMqIhYdE9qGn3fRDl0pou3f';
-   const apiUrl = 'https://shrtlnk.dev/api/v2/link';
+   // const apiKey = '39a5f51a09a6851ad901537b5b86657d';
+   const apiUrl = 'https://urlbae.com/api/url/add';
 
    const requestBody = {
       url: 'https://www.google.com',
    };
 
    const headers = {
-      'api-key': apiKey,
+      Authorization: 'Bearer 39a5f51a09a6851ad901537b5b86657d',
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Origin': '*',
    };
 
    const handleButtonClick = () => {
