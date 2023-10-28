@@ -32,52 +32,52 @@ const Form = () => {
 
    // NEW API
 
-   const apiKey = 'VTW8kvZRwlYRaGahFZaH8TQMqIhYdE9qGn3fRDl0pou3f';
-   const url = 'https://www.google.com';
-   const apiUrl = `https://www.shrtlnk.dev/api/v1/shorten?url=${encodeURIComponent(
-      url
-   )}&api_key=${apiKey}`;
+   // const apiKey = 'VTW8kvZRwlYRaGahFZaH8TQMqIhYdE9qGn3fRDl0pou3f';
+   // const url = 'https://www.google.com';
+   // const apiUrl = `https://www.shrtlnk.dev/api/v1/shorten?url=${encodeURIComponent(
+   //    url
+   // )}&api_key=${apiKey}`;
 
-   const requestOptions = {
-      method: 'POST',
-      headers: {
-         'api-key': apiKey,
-         Accept: 'application/json',
-         'Content-Type': 'application/json',
-      },
-   };
+   // const requestOptions = {
+   //    method: 'POST',
+   //    headers: {
+   //       'api-key': apiKey,
+   //       Accept: 'application/json',
+   //       'Content-Type': 'application/json',
+   //    },
+   // };
 
-   fetch(apiUrl, requestOptions)
-      .then((response) => {
-         if (!response.ok) {
-            throw new Error('Network response was not ok');
-         }
-         return response.json();
-      })
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+   // fetch(apiUrl, requestOptions)
+   //    .then((response) => {
+   //       if (!response.ok) {
+   //          throw new Error('Network response was not ok');
+   //       }
+   //       return response.json();
+   //    })
+   //    .then((data) => console.log(data))
+   //    .catch((error) => console.log(error));
 
    // OLD API
 
-   // const fetchData = async (userInput: string) => {
-   //    setIsLoading(true);
+   const fetchData = async (userInput: string) => {
+      setIsLoading(true);
 
-   //    try {
-   //       const response: AxiosResponse<ApiResponse> =
-   //          await axios.get<ApiResponse>(
-   //             `https://api.shrtco.de/v2/shorten?url=${userInput}`
-   //          );
-   //       const data: ApiResponse = response.data;
-   //       setResponseData(data);
-   //       setError(null);
-   //    } catch (error: any) {
-   //       if (error.response.data.error_code in customErrorMessages) {
-   //          setError(customErrorMessages[error.response.data.error_code]);
-   //       }
-   //    } finally {
-   //       setIsLoading(false);
-   //    }
-   // };
+      try {
+         const response: AxiosResponse<ApiResponse> =
+            await axios.get<ApiResponse>(
+               `https://api.shrtco.de/v2/shorten?url=${userInput}`
+            );
+         const data: ApiResponse = response.data;
+         setResponseData(data);
+         setError(null);
+      } catch (error: any) {
+         if (error.response.data.error_code in customErrorMessages) {
+            setError(customErrorMessages[error.response.data.error_code]);
+         }
+      } finally {
+         setIsLoading(false);
+      }
+   };
 
    return (
       <div>
