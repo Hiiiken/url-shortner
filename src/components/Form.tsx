@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 interface ApiResponse {
    result: { [key: string]: string };
@@ -35,29 +35,49 @@ const Form = () => {
    // NEW API
 
    const apiKey = 'VTW8kvZRwlYRaGahFZaH8TQMqIhYdE9qGn3fRDl0pou3f';
-   const url = 'https://www.google.com';
-   const apiUrl = `https://www.shrtlnk.dev/api/v1/shorten?url=${encodeURIComponent(
-      url
-   )}&api_key=${apiKey}`;
+   const apiUrl = 'https://shrtlnk.dev/api/v2/link';
 
-   const requestOptions = {
-      method: 'POST',
-      headers: {
-         'api-key': apiKey,
-         Accept: 'application/json',
-         'Content-Type': 'application/json',
-      },
+   const requestBody = {
+      url: 'https://www.google.com',
    };
 
-   fetch(apiUrl, requestOptions)
+   const headers = {
+      'api-key': apiKey,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+   };
+
+   axios
+      .post(apiUrl, requestBody, { headers })
       .then((response) => {
-         if (!response.ok) {
-            throw new Error('Network response was not ok');
-         }
-         return response.json();
+         console.log('Shortened URL:', response.data.shortened_url);
       })
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+         console.error('Error:', error);
+      });
+
+   // )}&api_key=${apiKey}`;
+   // const apiUrl = 'https://shrtlnk.dev/api/v2/link';
+
+   // const requestOptions = {
+   //    method: 'POST',
+   //    url: 'https://www.google.com',
+   //    headers: {
+   //       'api-key': apiKey,
+   //       Accept: 'application/json',
+   //       'Content-Type': 'application/json',
+   //    },
+   // };
+
+   // fetch(apiUrl, requestOptions)
+   //    .then((response) => {
+   //       if (!response.ok) {
+   //          throw new Error('Network response was not ok');
+   //       }
+   //       return response.json();
+   //    })
+   //    .then((data) => console.log(data))
+   //    .catch((error) => console.log(error));
 
    // OLD API
 
