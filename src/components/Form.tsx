@@ -16,22 +16,6 @@ const Form = () => {
       setInputValue(e.target.value);
    };
 
-   const handleButtonClick = () => {
-      // fetchData(inputValue);
-      setIsVisible(true);
-
-      console.log(setResponseData, setIsLoading, setError);
-   };
-
-   // const customErrorMessages: { [key: number]: string } = {
-   //    1: 'No URL specified. Please enter a URL to shorten.',
-   //    2: 'Invalid URL submitted. Please enter a valid URL.',
-   //    3: 'Rate limit reached. Wait a second and try again',
-   //    4: 'IP-Address has been blocked because of violating our terms of service',
-   //    5: 'shrtcode code (slug) already taken/in use',
-   //    10: 'Trying to shorten a disallowed Link. More information on disallowed links',
-   // };
-
    // NEW API
 
    const apiKey = 'VTW8kvZRwlYRaGahFZaH8TQMqIhYdE9qGn3fRDl0pou3f';
@@ -47,14 +31,38 @@ const Form = () => {
       'Content-Type': 'application/json',
    };
 
-   axios
-      .post(apiUrl, requestBody, { headers })
-      .then((response) => {
-         console.log('Shortened URL:', response.data.shortened_url);
-      })
-      .catch((error) => {
-         console.error('Error:', error);
-      });
+   const handleButtonClick = () => {
+      // fetchData(inputValue);
+      setIsVisible(true);
+
+      console.log(setResponseData, setIsLoading, setError);
+      axios
+         .post(apiUrl, requestBody, { headers })
+         .then((response) => {
+            console.log('Shortened URL:', response.data.shortened_url);
+         })
+         .catch((error) => {
+            console.error('Error:', error);
+         });
+   };
+
+   // const customErrorMessages: { [key: number]: string } = {
+   //    1: 'No URL specified. Please enter a URL to shorten.',
+   //    2: 'Invalid URL submitted. Please enter a valid URL.',
+   //    3: 'Rate limit reached. Wait a second and try again',
+   //    4: 'IP-Address has been blocked because of violating our terms of service',
+   //    5: 'shrtcode code (slug) already taken/in use',
+   //    10: 'Trying to shorten a disallowed Link. More information on disallowed links',
+   // };
+
+   // axios
+   //    .post(apiUrl, requestBody, { headers })
+   //    .then((response) => {
+   //       console.log('Shortened URL:', response.data.shortened_url);
+   //    })
+   //    .catch((error) => {
+   //       console.error('Error:', error);
+   //    });
 
    // )}&api_key=${apiKey}`;
    // const apiUrl = 'https://shrtlnk.dev/api/v2/link';
