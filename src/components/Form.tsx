@@ -29,6 +29,7 @@ const Form = () => {
       'api-key': apiKey,
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
    };
 
    const handleButtonClick = () => {
