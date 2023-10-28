@@ -37,6 +37,7 @@ const Form = () => {
       setIsVisible(true);
 
       console.log(setResponseData, setIsLoading, setError);
+
       axios
          .post(apiUrl, requestBody, { headers })
          .then((response) => {
@@ -46,47 +47,6 @@ const Form = () => {
             console.error('Error:', error);
          });
    };
-
-   // const customErrorMessages: { [key: number]: string } = {
-   //    1: 'No URL specified. Please enter a URL to shorten.',
-   //    2: 'Invalid URL submitted. Please enter a valid URL.',
-   //    3: 'Rate limit reached. Wait a second and try again',
-   //    4: 'IP-Address has been blocked because of violating our terms of service',
-   //    5: 'shrtcode code (slug) already taken/in use',
-   //    10: 'Trying to shorten a disallowed Link. More information on disallowed links',
-   // };
-
-   // axios
-   //    .post(apiUrl, requestBody, { headers })
-   //    .then((response) => {
-   //       console.log('Shortened URL:', response.data.shortened_url);
-   //    })
-   //    .catch((error) => {
-   //       console.error('Error:', error);
-   //    });
-
-   // )}&api_key=${apiKey}`;
-   // const apiUrl = 'https://shrtlnk.dev/api/v2/link';
-
-   // const requestOptions = {
-   //    method: 'POST',
-   //    url: 'https://www.google.com',
-   //    headers: {
-   //       'api-key': apiKey,
-   //       Accept: 'application/json',
-   //       'Content-Type': 'application/json',
-   //    },
-   // };
-
-   // fetch(apiUrl, requestOptions)
-   //    .then((response) => {
-   //       if (!response.ok) {
-   //          throw new Error('Network response was not ok');
-   //       }
-   //       return response.json();
-   //    })
-   //    .then((data) => console.log(data))
-   //    .catch((error) => console.log(error));
 
    // OLD API
 
