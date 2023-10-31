@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 interface ApiResponse {
    result: { [key: string]: string };
@@ -16,59 +16,39 @@ const Form = () => {
       setInputValue(e.target.value);
    };
 
-   // NEW API
-
-   // const apiKey = '39a5f51a09a6851ad901537b5b86657d';
-   const apiUrl = 'https://urlbae.com/api/url/add';
-
-   const requestBody = {
-      url: 'https://www.google.com',
-   };
-
-   const headers = {
-      Authorization: 'Bearer 39a5f51a09a6851ad901537b5b86657d',
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Origin': '*',
-   };
-
    const handleButtonClick = () => {
-      // fetchData(inputValue);
+      fetchData(inputValue);
       setIsVisible(true);
-
-      console.log(setResponseData, setIsLoading, setError);
-
-      axios
-         .post(apiUrl, requestBody, { headers })
-         .then((response) => {
-            console.log('Shortened URL:', response.data.shortened_url);
-         })
-         .catch((error) => {
-            console.error('Error:', error);
-         });
    };
 
-   // OLD API
+   const customErrorMessages: { [key: number]: string } = {
+      1: 'No URL specified. Please enter a URL to shorten.',
+      2: 'Invalid URL submitted. Please enter a valid URL.',
+      3: 'Rate limit reached. Wait a second and try again',
+      4: 'IP-Address has been blocked because of violating our terms of service',
+      5: 'shrtcode code (slug) already taken/in use',
+      10: 'Trying to shorten a disallowed Link. More information on disallowed links',
+   };
 
-   // const fetchData = async (userInput: string) => {
-   //    setIsLoading(true);
+   const fetchData = async (userInput: string) => {
+      setIsLoading(true);
 
-   //    try {
-   //       const response: AxiosResponse<ApiResponse> =
-   //          await axios.get<ApiResponse>(
-   //             `https://api.shrtco.de/v2/shorten?url=${userInput}`
-   //          );
-   //       const data: ApiResponse = response.data;
-   //       setResponseData(data);
-   //       setError(null);
-   //    } catch (error: any) {
-   //       if (error.response.data.error_code in customErrorMessages) {
-   //          setError(customErrorMessages[error.response.data.error_code]);
-   //       }
-   //    } finally {
-   //       setIsLoading(false);
-   //    }
-   // };
+      try {
+         const response: AxiosResponse<ApiResponse> =
+            await axios.get<ApiResponse>(
+               `https://api.shrtco.de/v2/shorten?url=${userInput}`
+            );
+         const data: ApiResponse = response.data;
+         setResponseData(data);
+         setError(null);
+      } catch (error: any) {
+         if (error.response.data.error_code in customErrorMessages) {
+            setError(customErrorMessages[error.response.data.error_code]);
+         }
+      } finally {
+         setIsLoading(false);
+      }
+   };
 
    return (
       <div>
